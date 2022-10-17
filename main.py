@@ -64,19 +64,24 @@ teamn = []
 for i in team:
     teamn.append(team_nba[i])
 
+
 # Get shedule from day before
-pre_url = 'https://www.nba.com/games?date='
+pre_url = 'https://www.cbssports.com/nba/scoreboard/'
 match_day = datetime.date.today()-datetime.timedelta(1)
 match_day = match_day.strftime('%Y-%m-%d')
+match_day = match_day.replace("-", "")
 url_match_day = pre_url + str(match_day)
+
 
 # Check if team played
 url_shedule = requests.get(url_match_day)
-text = url.text
+text = url_shedule.text
+
 for i in teamn:
     if i in text:
         notif = 1
     break
+
 
 # Send notification to my phone
 if notif == 1:
